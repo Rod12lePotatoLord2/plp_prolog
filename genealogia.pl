@@ -1,4 +1,7 @@
-% Cole exatamente este código do lado esquerdo:
+% =================================================================
+% FATOS (Base de Dados)
+% =================================================================
+
 pai(pedro, joao).
 pai(pedro, maria).
 pai(pedro, ana).
@@ -24,13 +27,18 @@ feminino(ana).
 feminino(julia).
 feminino(beatriz).
 
+% =================================================================
+% REGRAS (Lógica de Parentesco)
+% =================================================================
+
 progenitor(X, Y) :- pai(X, Y).
 progenitor(X, Y) :- mae(X, Y).
 
+% X \= Y garante que uma pessoa não seja irmã de si mesma
 irmao_generico(X, Y) :- progenitor(P, X), progenitor(P, Y), X \= Y.
 
 irmao(X, Y) :- irmao_generico(X, Y), masculino(X).
-irma_(X, Y)  :- irmao_generico(X, Y), feminino(X)
+irma_(X, Y) :- irmao_generico(X, Y), feminino(X).
 
 avo(X, Y)  :- pai(X, P), progenitor(P, Y).
 avoa(X, Y) :- mae(X, P), progenitor(P, Y).
